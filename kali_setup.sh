@@ -19,7 +19,7 @@ setup_environment () {
     # Download i3-gaps
     git clone https://github.com/airblader/i3 /tmp/i3-gaps
     # -- install i3-gaps dependencies
-    sudo apt install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
+    sudo apt -y install libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev
     # -- build i3-gaps
     cd /tmp/i3-gaps
     autoreconf --force --install
@@ -29,7 +29,7 @@ setup_environment () {
     make
     sudo make install
     # -- install missing dmenu
-    sudo apt install dmenu
+    sudo apt -y install dmenu
 
     # if i3_exlcusive is true, get rid of gnome
     if $i3_exclusive
@@ -38,7 +38,7 @@ setup_environment () {
     fi
 
     # Install vmware tools for proper display
-    sudo apt install open-vm-tools
+    sudo apt -y install open-vm-tools
 
 }
 
@@ -47,7 +47,7 @@ setup_environment () {
 setup_terminal () {
     
     # zsh
-    sudo apt install zsh
+    sudo apt -y install zsh
 
     # oh-my-zsh
     sh -c "$(curl -fsSL https://githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -70,7 +70,7 @@ setup_terminal () {
     mkdir -p ~/.vim/autoload ~/.vim/bundle && \
     curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
     # -- tmux
-    sudo apt install tmux
+    sudo apt -y install tmux
     # -- powerline package
     sudo pip install powerline-status
     powerline_dir=$(pip show powerline-status | grep Location | cut -d" " -f2)/powerline
