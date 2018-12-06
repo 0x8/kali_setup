@@ -16,50 +16,66 @@ i3_exclusive=false
 # Environment Setup
 setup_environment () {
 
-	# Download i3-gaps
-	git clone https://github.com/airblader/i3 /tmp/i3-gaps
-	# -- build i3-gaps
-	cd /tmp/i3-gaps
-	autoreconf --force --install
-	rm -rf build/
-	mkdir -p build && cd build/
-	../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-	make
-	sudo make install
-	# -- install missing dmenu
-	sudo apt install dmenu
+    # Download i3-gaps
+    git clone https://github.com/airblader/i3 /tmp/i3-gaps
+    # -- build i3-gaps
+    cd /tmp/i3-gaps
+    autoreconf --force --install
+    rm -rf build/
+    mkdir -p build && cd build/
+    ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+    make
+    sudo make install
+    # -- install missing dmenu
+    sudo apt install dmenu
 
-	# i3_exlcusive is true, install i3 exclusively
-	if $i3_exclusive
-	then	
-		sudo apt remove gnome
-	fi
+    # if i3_exlcusive is true, get rid of gnome
+    if $i3_exclusive
+    then    
+        sudo apt remove gnome
+    fi
 
 }
 
 # Apply terminal enhancements
 setup_terminal () {
-	
-	# zsh
-	sudo apt install zsh
+    
+    # zsh
+    sudo apt install zsh
 
-	# oh-my-zsh
-	sh -c "$(curl -fsSL https://githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    # oh-my-zsh
+    sh -c "$(curl -fsSL https://githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-	# powerline fonts
-	git clone https://github.com/powerline/fonts /tmp/powerline_fonts
-	/tmp/powerline_fonts/install.sh
+    # powerline fonts
+    git clone https://github.com/powerline/fonts /tmp/powerline_fonts
+    /tmp/powerline_fonts/install.sh
 
-	# powerline
-	# -- dotfiles
-	git clone https://github.com/0x8/nptr_dotfiles ~/.nptr_dotfiles
-	~/.nptr_dotfiles/install.sh
-	# -- vim (pathogen)
-	mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-	curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-	# -- tmux
-	sudo apt install tmux
-
-	# python virtualenv
+    # powerline
+    # -- dotfiles
+    git clone https://github.com/0x8/nptr_dotfiles ~/.nptr_dotfiles
+    ~/.nptr_dotfiles/install.sh
+    # -- vim (pathogen)
+    mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    # -- tmux
+    sudo apt install tmux
+    # -- powerline package
+    sudo pip install powerline-status
+    powerline_dir=$(pip show powerline-status | grep Location | cut -d" " -f2)/powerline
+    if [ ! -d $HOME/.vim/bundle ]
+    then
+        mkdir -p $HOME/.vim/bundle
+    fi
+    # -- -- [ ln -s SOURCE TARGET ]
+    # -- -- This should HOPEFULLY work here without much fuss
+    ln -s $powerline_dir/bindings/vim $HOME/.vim/bundle/powerline
+    # -- check and fix up .vimrc
+    sed -i "s/\"execute pathogen#infect()/execute pathogen#infect()" $HOME/.vimrc 
+    
+    # python virtualenv
+    # -- download from pip
+    pip install virtualenvwrapper
+    # -- -- the dotfiles should take care of evaluating if the script is present
+    # -- -- if not this is an easy manual fix.
 
 }
