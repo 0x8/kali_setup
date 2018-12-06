@@ -15,11 +15,23 @@ i3_exclusive=false
 
 # Environment Setup
 setup_environment () {
+
+	# Download i3-gaps
+	git clone https://github.com/airblader/i3 /tmp/i3-gaps
+	# -- build i3-gaps
+	cd /tmp/i3-gaps
+	autoreconf --force --install
+	rm -rf build/
+	mkdir -p build && cd build/
+	../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+	make
+	sudo make install
+	# -- install missing dmenu
+	sudo apt install dmenu
+
+	# i3_exlcusive is true, install i3 exclusively
 	if $i3_exclusive
-	then
-		# i3_exlcusive is true, install i3 exclusively
-		# -- download i3-gaps
-		git clone https://github.com/airblader/i3 /tmp/i3-gaps
+	then	
 		sudo apt remove gnome
 	fi
 
