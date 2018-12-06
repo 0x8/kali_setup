@@ -91,3 +91,4 @@ setup_terminal () {
 setup_terminal
 setup_environment
 # Reboot system to finalize changes
+reboot
