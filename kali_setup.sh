@@ -49,9 +49,6 @@ setup_terminal () {
     # zsh
     sudo apt -y install zsh
 
-    # oh-my-zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
     # powerline fonts
     git clone https://github.com/powerline/fonts /tmp/powerline_fonts
     /tmp/powerline_fonts/install.sh
@@ -90,5 +87,7 @@ setup_terminal () {
 # Run the commands
 setup_terminal
 setup_environment
-# Reboot system to finalize changes
-reboot
+
+# oh-my-zsh needs to be installed after everything else as it exits to terminal upon completion
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
