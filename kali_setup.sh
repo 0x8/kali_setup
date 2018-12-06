@@ -79,3 +79,6 @@ setup_terminal () {
     # -- -- if not this is an easy manual fix.
 
 }
+
+setup_terminal
+setup_environment
