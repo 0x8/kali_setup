@@ -50,7 +50,7 @@ setup_terminal () {
     sudo apt -y install zsh
 
     # oh-my-zsh
-    sh -c "$(curl -fsSL https://githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
     # powerline fonts
     git clone https://github.com/powerline/fonts /tmp/powerline_fonts
@@ -82,7 +82,7 @@ setup_terminal () {
     # -- -- This should HOPEFULLY work here without much fuss
     ln -s $powerline_dir/bindings/vim $HOME/.vim/bundle/powerline
     # -- check and fix up .vimrc
-    sed -i "s/\"execute pathogen#infect()/execute pathogen#infect()" $HOME/.vimrc 
+    sed -i "s/\"execute pathogen#infect()/execute pathogen#infect()/g" $HOME/.vimrc 
     
 }
 
