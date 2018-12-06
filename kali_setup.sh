@@ -37,6 +37,7 @@ setup_environment () {
 
 }
 
+
 # Apply terminal enhancements
 setup_terminal () {
     
@@ -49,6 +50,12 @@ setup_terminal () {
     # powerline fonts
     git clone https://github.com/powerline/fonts /tmp/powerline_fonts
     /tmp/powerline_fonts/install.sh
+
+    # python virtualenv
+    # -- download from pip
+    pip install virtualenvwrapper
+    # -- -- the dotfiles should take care of evaluating if the script is present
+    # -- -- if not this is an easy manual fix.
 
     # powerline
     # -- dotfiles
@@ -72,13 +79,9 @@ setup_terminal () {
     # -- check and fix up .vimrc
     sed -i "s/\"execute pathogen#infect()/execute pathogen#infect()" $HOME/.vimrc 
     
-    # python virtualenv
-    # -- download from pip
-    pip install virtualenvwrapper
-    # -- -- the dotfiles should take care of evaluating if the script is present
-    # -- -- if not this is an easy manual fix.
-
 }
 
+
+# Run the commands
 setup_terminal
 setup_environment
