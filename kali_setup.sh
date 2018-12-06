@@ -55,7 +55,7 @@ setup_environment () {
     # -- pull the latest build
     git clone https://github.com/jaagr/polybar /tmp/polybar
     # -- dependencies
-    sudo apt -y install libcairo2-dev libcurl4-openssl-dev cmake python-xcbgen libpulse-dev libxcb-ewmh-dev libxcb-image0-dev xcb-proto i3-wm cmake-data libiw-dev libmpdclient-dev pkg-config libasound2-dev libxcb-composite0-dev  
+    sudo apt -y install libcairo2-dev libcurl4-openssl-dev cmake python-xcbgen libpulse-dev libxcb-ewmh-dev libxcb-image0-dev xcb-proto cmake-data libiw-dev libmpdclient-dev pkg-config libasound2-dev libxcb-composite0-dev  
     # -- build & install
     mkdir /tmp/polybar/build
     cd /tmp/polybar/build
@@ -121,3 +121,7 @@ setup_terminal () {
 # Run the commands
 setup_terminal
 setup_environment
+
+# Run updates (This takes an EXTREMELY long time if being done for the first time
+sudo apt -y upgrade && sudo apt -y dist-upgrade
+
