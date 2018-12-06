@@ -35,6 +35,9 @@ setup_environment () {
         sudo apt remove gnome
     fi
 
+    # Install vmware tools for proper display
+    sudo apt install open-vm-tools
+
 }
 
 
@@ -85,3 +88,4 @@ setup_terminal () {
 # Run the commands
 setup_terminal
 setup_environment
+# Reboot system to finalize changes
