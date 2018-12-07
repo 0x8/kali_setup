@@ -51,6 +51,17 @@ setup_environment () {
     sudo apt -y --reinstall install open-vm-tools-desktop fuse
 
 
+    # Polybar
+    # -- pull the latest build
+    git clone https://github.com/jaagr/polybar /tmp/polybar
+    # -- dependencies
+    sudo apt -y install libcairo2-dev libcurl4-openssl-dev cmake python-xcbgen libpulse-dev libxcb-ewmh-dev libxcb-image0-dev xcb-proto i3-wm cmake-data libiw-dev libmpdclient-dev pkg-config libasound2-dev libxcb-composite0-dev  
+    # -- build & install
+    mkdir /tmp/polybar/build
+    cd /tmp/polybar/build
+    cmake ..
+    make install
+
 }
 
 
