@@ -64,6 +64,8 @@ setup_terminal () {
     chmod +x oh-my-zsh_installer.sh
     sed -i "s/env zsh -l//g" oh-my-zsh_installer.sh
     ./oh-my-zsh_installer.sh
+    # -- Remove artefact installer
+    rm oh-my-zsh_installer.sh
 
     # powerline fonts
     git clone https://github.com/powerline/fonts /tmp/powerline_fonts
