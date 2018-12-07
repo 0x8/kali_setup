@@ -37,8 +37,14 @@ setup_environment () {
         sudo apt remove gnome
     fi
 
+    sudo apt -y install i3status
+
     # Install vmware tools for proper display
     sudo apt -y install open-vm-tools
+    # -- fix broken service script
+    # -- The default open-vm-tools service is broken for some odd reason
+    # -- requiring the addition of the following edit to scale properly at boot
+    sed -i '/\[Unit\]/a After=graphical.target' /etc/systemd/system/multi-user.target.wants/open-vm-tools.service
 
 }
 
