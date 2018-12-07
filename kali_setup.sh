@@ -46,6 +46,11 @@ setup_environment () {
     # -- requiring the addition of the following edit to scale properly at boot
     sed -i '/\[Unit\]/a After=graphical.target' /etc/systemd/system/multi-user.target.wants/open-vm-tools.service
 
+    # -- even more fixups for open-vm-tools as it is tremendously broken on Kali for
+    # -- some reason or another
+    sudo apt -y --reinstall install open-vm-tools-desktop fuse
+
+
 }
 
 
@@ -75,9 +80,11 @@ setup_terminal () {
     # -- download from pip
     pip install virtualenvwrapper
     # -- -- the dotfiles should take care of evaluating if the script is present
-    # -- -- if not this is an easy manual fix.
+    # -- -- but if not this is an easy manual fix.
 
     # powerline
+    # -- powerline package
+    sudo pip install powerline-status
     # -- dotfiles
     git clone https://github.com/0x8/nptr_dotfiles ~/.nptr_dotfiles
     ~/.nptr_dotfiles/install.sh
@@ -86,8 +93,6 @@ setup_terminal () {
     curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
     # -- tmux
     sudo apt -y install tmux
-    # -- powerline package
-    sudo pip install powerline-status
     powerline_dir=$(pip show powerline-status | grep Location | cut -d" " -f2)/powerline
     if [ ! -d $HOME/.vim/bundle ]
     then
