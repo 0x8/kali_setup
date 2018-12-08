@@ -68,6 +68,10 @@ setup_environment () {
 # Apply terminal enhancements
 setup_terminal () {
     
+    # terminator
+    # -- config taken care of during dotfile install
+    sudo apt -y install terminator
+
     # zsh
     sudo apt -y install zsh
 
