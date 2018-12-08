@@ -53,7 +53,7 @@ setup_environment () {
 
     # Polybar
     # -- pull the latest build
-    git clone https://github.com/jaagr/polybar /tmp/polybar
+    git clone --recursive https://github.com/jaagr/polybar /tmp/polybar
     # -- dependencies
     sudo apt -y install libcairo2-dev libcurl4-openssl-dev cmake python-xcbgen libpulse-dev libxcb-ewmh-dev libxcb-image0-dev xcb-proto cmake-data libiw-dev libmpdclient-dev pkg-config libasound2-dev libxcb-composite0-dev  
     # -- build & install
