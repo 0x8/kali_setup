@@ -41,10 +41,16 @@ setup_environment () {
 
     # Install vmware tools for proper display
     sudo apt -y install open-vm-tools
-    # -- fix broken service script
-    # -- The default open-vm-tools service is broken for some odd reason
-    # -- requiring the addition of the following edit to scale properly at boot
-    sed -i '/\[Unit\]/a After=graphical.target' /etc/systemd/system/multi-user.target.wants/open-vm-tools.service
+    # -- Check to ensure kali didn't do something stupid like copy the service file into
+    # -- /etc/systemd/system/multi-user.target.wants/open-vm-tools.service as this will
+    # -- completely break the tools.
+    service_loc="/etc/systemd/system/multi-user.target.wants/open-vm-tools.service"
+    if [ -f $service_loc -a ! -h $service_loc ]
+    then
+        # -- remove the copied service and let systemd do its thing with enable
+        rm $service_loc
+        systemctl enable open-vm-tools.service
+    fi
 
     # -- even more fixups for open-vm-tools as it is tremendously broken on Kali for
     # -- some reason or another
