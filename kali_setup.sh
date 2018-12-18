@@ -127,10 +127,29 @@ setup_terminal () {
     
 }
 
+nptr_dotfile_fixups () {
+# This section handles the editing of dotfiles from my dotfile dir
+# (https://github.com/0x8/nptr_dotfiles) downloaded in setup_terminal.
+# This section ensures that the lines that will be commented out during
+# the dotfile installer, be uncommented as the dependencies should be fulfilled
+# by this script
+
+# VIM
+# uncomment vim pathogen
+sed -i s/\"execute pathogen/execute pathogen/g $HOME/.vimrc
+
+# TMUX
+# lines tokens should simply be "run-shell \"powerline" and
+# "source /usr/local/lib/python"
+sed -i "s@\#run-shell \"pow@run-shell \"pow/g" ~/.tmux.conf
+sed -i "s@\#source /usr/local/lib/python@source /usr/local/lib/python/g" ~/.tmux.conf
+
+}
 
 # Run the commands
 setup_terminal
 setup_environment
+nptr_dotfile_fixups
 
 # Run updates (This takes an EXTREMELY long time if being done for the first time
 sudo apt -y upgrade && sudo apt -y dist-upgrade
