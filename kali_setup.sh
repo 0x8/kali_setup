@@ -151,6 +151,17 @@ setup_terminal
 setup_environment
 nptr_dotfile_fixups
 
+# Fix ssh when using a NAT'd network interface (Default in VMWare)
+# openssh created a breaking change a few months back but luckily
+# the fix is fairly simple
+if [ -f "$HOME/.ssh/config" ]
+then
+    # Append to existing, add a blank buffer line for clarity
+    echo "" >> "$HOME/.ssh/config"
+fi
+echo "Host *" >> "$HOME/.ssh/config"
+echo "    IPQoS lowdelay throughput" >> "$HOME/.ssh/config"
+
 # Run updates (This takes an EXTREMELY long time if being done for the first time
 sudo apt -y upgrade && sudo apt -y dist-upgrade
 
