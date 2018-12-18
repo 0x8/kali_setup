@@ -107,7 +107,7 @@ setup_terminal () {
     # -- powerline package
     sudo pip install powerline-status
     # -- dotfiles
-    git clone https://github.com/0x8/nptr_dotfiles ~/.nptr_dotfiles
+    git clone --single-branch --branch kali https://github.com/0x8/nptr_dotfiles ~/.nptr_dotfiles
     ~/.nptr_dotfiles/install.sh
     # -- vim (pathogen)
     mkdir -p ~/.vim/autoload ~/.vim/bundle && \
